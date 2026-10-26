@@ -137,12 +137,12 @@ if "series_done" in st.session_state:
         kind, text = verdict_exponent(exponent, hub)
         getattr(st, kind)(text)
     with tab2:
-        st.markdown("**Dieselbe Regel in Varianten:** Zufall, unter- und überlinear, Alterung, Fitness und Anfangsattraktivität; rot: ein einziger Hub hält mehr als ein Zehntel aller Kantenenden.")
+        st.markdown("**Dieselbe Regel in Varianten:** Zufall, unter- und überlinear, Alterung, Fitness und Anfangsattraktivität; rot: der größte Hub hält mehr als ein Zehntel aller Kantenenden.")
         st.plotly_chart(build_models(models), width="stretch", key="models_chart")
         kind, text = verdict_models(models)
         getattr(st, kind)(text)
     with tab3:
-        st.markdown("**Oberhalb von Exponent 1 wächst der Anteil des größten Hubs steil:** wer schon viele hat, bekommt überproportional mehr, und ein einziger Knoten hält schließlich einen großen Teil aller Kanten.")
+        st.markdown("**Oberhalb von Exponent 1 wächst der Anteil des größten Hubs steil:** wer schon viele hat, bekommt überproportional mehr, und der größte Knoten hält schließlich einen großen Teil aller Kanten (bei m = 1 ein einziger Knoten, bei m ≥ 2 halten auch weitere Hubs viel).")
         st.plotly_chart(build_kernel(kernel), width="stretch", key="kernel_chart")
         kind, text = verdict_kernel(kernel)
         getattr(st, kind)(text)
@@ -157,7 +157,7 @@ st.markdown(
     """
 | Annahme | Was passiert, wenn sie verletzt ist | Wer setzt an |
 |---|---|---|
-| **Die Regel ist bekannt** | Aus einem Netz allein lässt sich die Wachstumsregel nicht ablesen: verschiedene Regeln erzeugen ähnliche Gradverteilungen. | Modellwahl (Folgestück) |
+| **Die Regel ist bekannt** | Aus einem Netz allein lässt sich die Wachstumsregel nicht ablesen: verschiedene Regeln können ähnliche Gradverteilungen erzeugen (in dieser Demo nicht gemessen). | Modellwahl (Folgestück) |
 | **Der Exponent ist eine Zahl** | Aus endlichen Daten hängt der geschätzte Exponent von der Untergrenze ab; ob die Verteilung überhaupt ein Potenzgesetz ist, prüft ein Test. | Skalenfrei? Potenzgesetz-Test (Folgestück) |
 | **Nur Wachstum der Kanten an neue Knoten** | Reale Netze bekommen auch Kanten zwischen alten Knoten und verlieren Knoten; das Modell kennt weder Gemeinschaften noch Dreiecke noch Raum. | Netze im Raum, Motive (Folgestücke) |
 | **Die Gradfolge entsteht aus der Regel** | Das Konfigurationsmodell würfelt Netze zu gegebenen Graden, ohne zu fragen, woher sie kommen. | Konfigurationsmodell (Vorgänger) |
@@ -196,7 +196,7 @@ $$P(k) = \frac{1}{m+1} \left( \frac{m}{m+1} \right)^{k-m}.$$
 
 **Anfangsattraktivität.** Bei $a = 1$ und $A_0 > 0$ ist der Exponent $3 + A_0 / m$.
 
-**Überlinear** ($a > 1$). Ein einziger Knoten zieht einen festen Anteil aller Kanten an sich (Krapivsky, Redner, Leyvraz).
+**Überlinear** ($a > 1$). Ein einziger Knoten (bei $m = 1$) bzw. wenige Knoten (bei $m \ge 2$) ziehen einen großen Anteil aller Kanten an sich (Krapivsky, Redner, Leyvraz); bei $m = 2$ halten die zwei größten Hubs zusammen 29 bis 39 % der Kantenenden (n = 4 000 bis 10 000, mehrere Pläne). Ob der Anteil für $n \to \infty$ fest bleibt, prüft die Demo nicht: er wächst mit n.
 
 **Exponent-Schätzer.** Für die Grade $k \ge k_{\min}$ ist $\hat\alpha = 1 + N \big/ \sum_i \ln\!\big(k_i / (k_{\min} - 1/2)\big)$.
 

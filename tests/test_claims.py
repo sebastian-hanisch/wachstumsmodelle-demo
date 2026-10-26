@@ -81,7 +81,7 @@ def test_the_largest_degree_grows_like_the_root_of_n(hub):
     assert hub[-1]["kmax"] == pytest.approx(972, rel=0.25) and hub[0]["kmax"] == pytest.approx(117, rel=0.3)
     by_n = {r["n"]: r for r in hub}
     assert by_n[4000]["low"] == pytest.approx(169, rel=0.2) and by_n[4000]["high"] == pytest.approx(294, rel=0.2)  # Streuung der Pläne (Ehrliche Grenzen)
-    # m·√n ist nur die Größenordnung: gemessen etwa das 1,2- bis 1,3-fache
+    # m·√n ist nur die Größenordnung: in den fünf festen Plänen etwa das 1,2- bis 1,3-fache (mit mehreren hundert Zufalls-Seeds etwa das 1,0-fache, siehe README)
     scale = [r["kmax"] / (C.HUB_M * math.sqrt(r["n"])) for r in hub]
     assert 1.05 < min(scale) and max(scale) < 1.5
 

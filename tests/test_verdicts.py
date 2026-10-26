@@ -19,7 +19,7 @@ def test_model_verdict_for_the_linear_rule_names_the_exponent_and_the_reference(
 
 def test_model_verdict_for_a_dominating_hub():
     kind, text = ev.verdict_model(make(kmax=3531, share=0.221, theory=None))
-    assert kind == "warning" and "Ein einziger Hub" in text and "22,1 %" in text and "3531" in text
+    assert kind == "warning" and "Der größte Hub zieht" in text and "wenigen Hubs" in text and "22,1 %" in text and "3531" in text
 
 
 def test_model_verdict_threshold_for_the_dominating_hub_is_ten_percent():

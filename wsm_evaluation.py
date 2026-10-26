@@ -100,11 +100,11 @@ def series_kernel(exponents=C.KERNEL_EXPONENTS, n: int = C.KERNEL_N, m: int = C.
 
 
 def verdict_model(a: Analysis) -> tuple[str, str]:
-    """Kernfrage der Hauptansicht: was entsteht bei diesem Modell, ein Potenzgesetz, ein einziger Hub oder gar keine Hubs?"""
+    """Kernfrage der Hauptansicht: was entsteht bei diesem Modell, ein Potenzgesetz, ein beherrschender Hub oder gar keine Hubs?"""
     s = a.settings
     base = f"Größter Grad {a.kmax} bei n = {s.n} und m = {s.m} (die lineare Anbindung liegt etwa bei m·√n = {num(a.reference, 0)}); der größte Hub hält {num(a.share * 100, 1)} % aller Kantenenden"
     if a.share >= 0.1:
-        return "warning", base + ". Ein einziger Hub zieht einen großen Teil aller Kanten an sich: das Netz ist nicht mehr skalenfrei, sondern von einem Zentrum beherrscht."
+        return "warning", base + ". Der größte Hub zieht einen großen Teil aller Kanten an sich (bei m = 1 gewinnt ein einziger Knoten, bei m ≥ 2 halten weitere Hubs fast ebenso viel): das Netz ist nicht mehr skalenfrei, sondern von wenigen Hubs beherrscht."
     if a.theory == "linear":
         return "success", base + f". Der Exponent des Potenzgesetzes ist geschätzt α̂ = {num(a.alpha, 2)} ab Grad {a.kmin} (Theorie für n → ∞: 3,0)."
     if a.theory == "uniform":
@@ -117,7 +117,7 @@ def verdict_exponent(rows: list[dict], hub: list[dict]) -> tuple[str, str]:
     lo, hi = rows[0], rows[-1]
     ratios = [r["ratio"] for r in hub]
     return "info", (f"Der geschätzte Exponent hängt von der Untergrenze ab: α̂ = {num(lo['alpha'], 2)} ab Grad {lo['kmin']} und {num(hi['alpha'], 2)} ab Grad {hi['kmin']} (Theorie für n → ∞: 3,0). "
-                    f"Der größte Grad geteilt durch √n liegt bei n = {hub[0]['n']} bis {hub[-1]['n']} zwischen {num(min(ratios), 1)} und {num(max(ratios), 1)}: er wächst wie √n.")
+                    f"Der größte Grad geteilt durch √n liegt bei n = {hub[0]['n']} bis {hub[-1]['n']} zwischen {num(min(ratios), 1)} und {num(max(ratios), 1)} (fünf Pläne je Größe; mit mehreren hundert Zufalls-Seeds liegt der Median bei m = 3 nahe 3,0): er wächst wie √n.")
 
 
 def verdict_models(rows: list[dict]) -> tuple[str, str]:
@@ -126,7 +126,8 @@ def verdict_models(rows: list[dict]) -> tuple[str, str]:
     lin, rnd, sup = by["linear (Barabási–Albert)"], by["Zufallsanbindung (a = 0)"], by["überlinear (a = 1,5)"]
     old, fit = by["linear mit Alterung (nu = 1)"], by["linear mit Fitness"]
     return "info", (f"Bei n = {C.MODEL_N} und m = {C.MODEL_M} hat die lineare Anbindung im Median den größten Grad {num(lin['kmax'], 0)}, die Zufallsanbindung {num(rnd['kmax'], 0)}, mit Alterung {num(old['kmax'], 0)}, mit Fitness {num(fit['kmax'], 0)}; "
-                    f"bei überlinearer Anbindung hält ein einziger Hub {num(sup['share'] * 100, 0)} % aller Kantenenden (größter Grad {num(sup['kmax'], 0)}).")
+                    f"bei überlinearer Anbindung hält der größte Hub {num(sup['share'] * 100, 0)} % aller Kantenenden (größter Grad {num(sup['kmax'], 0)}), und bei m = {C.MODEL_M} hält ein zweiter Hub fast ebenso viel. "
+                    "Die Mediane stammen aus fünf Plänen; der größte Grad der Fitness-Regel und der überlinearen Regel streut von Plan zu Plan stark.")
 
 
 def verdict_kernel(rows: list[dict]) -> tuple[str, str]:

@@ -40,14 +40,14 @@ COLOR_ALERT = "#d62728"
 PRESETS = {
     "Standardfall: lineare Anbindung": {"n": DEFAULT_N, "m": DEFAULT_M, "a": DEFAULT_A, "a0": DEFAULT_A0, "nu": DEFAULT_NU, "fitness": DEFAULT_FITNESS, "seed": DEFAULT_SEED},
     "Zufallsanbindung (a = 0)": {"n": 2500, "m": DEFAULT_M, "a": 0.0, "a0": DEFAULT_A0, "nu": DEFAULT_NU, "fitness": DEFAULT_FITNESS, "seed": DEFAULT_SEED},
-    "Überlinear: ein Hub gewinnt (a = 1,5)": {"n": 2500, "m": DEFAULT_M, "a": 1.5, "a0": DEFAULT_A0, "nu": DEFAULT_NU, "fitness": DEFAULT_FITNESS, "seed": DEFAULT_SEED},
+    "Überlinear: wenige Hubs gewinnen (a = 1,5)": {"n": 2500, "m": DEFAULT_M, "a": 1.5, "a0": DEFAULT_A0, "nu": DEFAULT_NU, "fitness": DEFAULT_FITNESS, "seed": DEFAULT_SEED},
     "Alterung (nu = 1)": {"n": 2500, "m": DEFAULT_M, "a": DEFAULT_A, "a0": DEFAULT_A0, "nu": 1.0, "fitness": DEFAULT_FITNESS, "seed": DEFAULT_SEED},
     "Fitness: Neulinge können aufholen": {"n": 2500, "m": DEFAULT_M, "a": DEFAULT_A, "a0": DEFAULT_A0, "nu": DEFAULT_NU, "fitness": "uniform", "seed": DEFAULT_SEED},
 }
 PRESET_HELP = {
     "Standardfall: lineare Anbindung": "3 000 Knoten, jeder neue Knoten wählt zwei Ziele mit Wahrscheinlichkeit proportional zum Grad: das Barabási–Albert-Modell. Die Gradverteilung folgt einem Potenzgesetz, der größte Grad wächst etwa mit der Wurzel aus n.",
     "Zufallsanbindung (a = 0)": "Jedes Ziel gleich wahrscheinlich: ohne Bevorzugung gibt es keine Hubs, die Gradverteilung fällt exponentiell und der größte Grad bleibt klein.",
-    "Überlinear: ein Hub gewinnt (a = 1,5)": "Gewicht k hoch 1,5: wer schon viele hat, bekommt überproportional mehr, und ein einziger Hub zieht einen großen Teil aller Kanten an sich.",
+    "Überlinear: wenige Hubs gewinnen (a = 1,5)": "Gewicht k hoch 1,5: wer schon viele hat, bekommt überproportional mehr, und wenige Hubs ziehen einen großen Teil aller Kanten an sich (bei m = 2 hält auch der zweitgrößte Hub noch viel).",
     "Alterung (nu = 1)": "Das Gewicht sinkt mit dem Alter der Knoten: alte Knoten verlieren ihren Vorsprung, es entstehen keine großen Hubs und die Verteilung fällt steil ab.",
     "Fitness: Neulinge können aufholen": "Jeder Knoten hat eine zufällige Fitness als Faktor im Gewicht: Spätankömmlinge mit hoher Fitness holen auf, und der größte Hub wird größer als ohne Fitness.",
 }
